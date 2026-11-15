@@ -8,7 +8,7 @@
 
 [![Swift](https://img.shields.io/badge/Swift-6.0-F05138?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![SwiftUI](https://img.shields.io/badge/SwiftUI-Framework-0071E3?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/xcode/swiftui/)
-[![Platform](https://img.shields.io/badge/Platform-iOS%2018.4%2B-black?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/ios/)
+[![Platform](https://img.shields.io/badge/Platform-iOS%20%2F%20iPadOS%2018.4%2B-black?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/ios/)
 [![WebKit](https://img.shields.io/badge/WebKit-Native%20WebView-34C759?style=for-the-badge&logo=safari&logoColor=white)](https://developer.apple.com/documentation/webkit)
 [![Clearance](https://img.shields.io/badge/Clearance-Level%204%20%2F%20O5-8B0000?style=for-the-badge)](https://scp-zh-tr.wikidot.com)
 [![Anomalies](https://img.shields.io/badge/Anomalies-40%20Dossiers-6A0DAD?style=for-the-badge)](https://scp-zh-tr.wikidot.com)
@@ -30,26 +30,26 @@
 
 ## 📖 Overview
 
-**SCP Foundation Monster Encyclopedia (`SCP 基金會怪物圖鑑`)** is a sleek, native iOS encyclopedia application built with **SwiftUI** and **WebKit**. Designed like a classified Level-4 / O5 Foundation terminal, this app catalogs **40 iconic SCP anomalies** across the four core Object Classes—**Safe**, **Euclid**, **Keter**, and **Thaumiel** (10 curated entities per class).
+**SCP Foundation Monster Encyclopedia (`SCP 基金會怪物圖鑑`)** is a sleek, native iOS & iPadOS encyclopedia application built with **SwiftUI** and **WebKit**. Designed like a classified Level-4 / O5 Foundation terminal, this app catalogs **40 iconic SCP anomalies** across the four core Object Classes—**Safe**, **Euclid**, **Keter**, and **Thaumiel** (10 curated entities per class).
 
-Users can browse interactive horizontal paging carousels, learn the Foundation's famous **"Box Test" classification rules**, inspect multi-slide confidential observation logs, read Special Containment Procedures, and seamlessly access the official **Traditional Chinese SCP Foundation Wiki (`scp-zh-tr.wikidot.com`)** directly inside the app via native `WebView`.
+Users can browse interactive horizontal paging carousels, learn the Foundation's famous **"Box Test" classification rules**, inspect multi-slide confidential observation logs, read Special Containment Procedures, and seamlessly access the official **Traditional Chinese SCP Foundation Wiki (`scp-zh-tr.wikidot.com`)** directly inside the app via native `WebView`. On **iPadOS**, the app automatically adapts its `TabView` into the modern **floating top Tab Bar** for effortless large-screen navigation.
 
 ---
 
 ## 🎬 App Demo & Screenshots
 
-### 📽️ Interactive Operation GIF
+### 🎞️ Interactive Operation GIF
 
 <div align="center">
   <img src="screenshots/demo.gif" alt="SCP Foundation App Demo GIF" width="320" />
   <p><em>👆 Navigating across Object Class tabs, horizontal paging cards, confidential dossiers, and the in-app SCP Wiki WebView.</em></p>
 </div>
 
-### 📱 Interface Screenshots
+### 📱 iPhone Interface Screenshots
 
 <div align="center">
 
-#### 🔐 Terminal Launch & Object Class Archives (`Safe` · `Euclid` · `Keter` · `Thaumiel`)
+#### 🔐 Terminal Launch & Object Class Archives (`Safe` · `Euclid` · `Keter`)
 
 | 🛡️ Terminal Launch Screen | 🟢 Safe Class Archive | 🟠 Euclid Class Archive | 🔴 Keter Class Archive |
 | :---: | :---: | :---: | :---: |
@@ -67,8 +67,21 @@ Users can browse interactive horizontal paging carousels, learn the Foundation's
 
 </div>
 
+<br />
+
+### 💻 iPadOS Adaptive Layout (Top Floating Tab Bar)
+
+<div align="center">
+
+| 💻 iPad Pro 11-inch — Top Tab Bar Navigation (`TabView` at Top of Screen) |
+| :---: |
+| <img src="screenshots/ipad_top_tab.png" alt="iPad Pro Top Tab Bar Screenshot" width="460" /> |
+| **Native iPadOS Top Tab Bar (`Safe` · `Euclid` · `Keter` · `Thaumiel` · `基金會官網`)**<br/>Automatically elevates the 5-tab bar to a floating capsule at the top of the screen on iPadOS for spacious widescreen browsing |
+
+</div>
+
 > [!TIP]
-> **📁 Screenshot & GIF File Paths:** Place your recorded GIF and simulator screenshots inside a `screenshots/` folder at the project root using the filenames above (`demo.gif`, `launch_screen.png`, `safe_list.png`, `euclid_list.png`, `keter_list.png`, `thaumiel_list.png`, `scp_detail.png`, `official_wiki_detail.png`, `official_wiki_tab.png`) to render them automatically!
+> **📁 Screenshot & GIF File Paths:** All screenshots and the operation GIF are stored inside the [`screenshots/`](file:///Users/115-1student21/Desktop/SCP%20基金會怪物圖鑑/screenshots) folder at the project root (`demo.gif`, `launch_screen.png`, `safe_list.png`, `euclid_list.png`, `keter_list.png`, `thaumiel_list.png`, `scp_detail.png`, `official_wiki_detail.png`, `official_wiki_tab.png`, `ipad_top_tab.png`).
 
 ---
 
@@ -76,8 +89,8 @@ Users can browse interactive horizontal paging carousels, learn the Foundation's
 
 - 🔐 **Classified Terminal Launch Screen (`SCPLaunchScreenView`)**
   - Atmospheric dark-crimson gradient background with a pulsing Foundation shield emblem, Level 4 / O5 clearance warning banner, and biometric entry trigger.
-- 🗂️ **5-Tab Navigation Architecture (`TabView`)**
-  - Dedicated tabs for **Safe**, **Euclid**, **Keter**, **Thaumiel**, and the **Official SCP Wiki Portal**, styled with semantic SF Symbols and crimson accent tinting.
+- 🗂️ **Adaptive 5-Tab Navigation Architecture (`TabView`)**
+  - Dedicated tabs for **Safe**, **Euclid**, **Keter**, **Thaumiel**, and the **Official SCP Wiki Portal**, styled with semantic SF Symbols and crimson accent tinting—displaying as a bottom tab bar on iPhone and an **elevated floating top tab bar on iPad**.
 - 🎠 **Featured Anomaly Paging Carousel (`TabView` + `.tabViewStyle(.page)`)**
   - Top section of every category list features swipeable gradient hero cards showcasing each anomaly's item code, class badge, tagline, and containment site.
 - 📦 **"The Box Test" Classification Guide**
@@ -107,7 +120,7 @@ The SCP Foundation classifies anomalies based on **containment difficulty** rath
 ```text
 SCP 基金會怪物圖鑑/
 ├── SCP 基金會怪物圖鑑.xcodeproj/       # Xcode Project Configuration
-├── screenshots/                       # App Screenshots & Demo GIF
+├── screenshots/                       # App Screenshots (iPhone & iPad) & Demo GIF
 └── SCP 基金會怪物圖鑑/
     ├── MyApp.swift                    # @main App entry point
     ├── ContentView.swift              # Root 5-tab TabView & Launch Screen sheet
@@ -126,7 +139,7 @@ SCP 基金會怪物圖鑑/
 - **Language:** Swift 6.0
 - **UI Framework:** SwiftUI (`NavigationStack`, `NavigationLink`, `TabView`, `.tabViewStyle(.page)`, `List`, `ScrollView`, `Material` blur effects)
 - **Web Rendering:** `WebKit` (`WebView`)
-- **Minimum Deployment:** iOS 18.4+ / macOS / visionOS compatible views
+- **Minimum Deployment:** iOS / iPadOS 18.4+ (macOS / visionOS compatible views)
 - **IDE:** Xcode 16.3+ / Xcode 26+
 
 ## 🚀 Getting Started
@@ -139,7 +152,7 @@ SCP 基金會怪物圖鑑/
 2. **Open in Xcode:**
    Double-click `SCP 基金會怪物圖鑑.xcodeproj` to open the project in Xcode.
 3. **Build & Run:**
-   Select an iPhone Simulator (e.g., **iPhone 16 Pro / iPhone 17 Pro**) and press **`Cmd + R`** to launch the archive.
+   Select an iPhone or iPad Simulator (e.g., **iPhone 17 Pro Max** or **iPad Pro 11-inch**) and press **`Cmd + R`** to launch the archive.
 
 <div align="right">
   <a href="#top">⬆️ Back to Top</a> ｜ <a href="#chinese">🇹🇼 切換至繁體中文版</a>
@@ -156,22 +169,22 @@ SCP 基金會怪物圖鑑/
 
 ## 📖 專案簡介
 
-**《SCP 基金會怪物圖鑑》** 是一款使用 **SwiftUI** 與 **WebKit** 原生打造的 iOS 機密收容檔案百科 App。整體視覺以「SCP 基金會第 4 級／O5 議會最高機密終端機」為主題，完整收錄 **Safe（安全）**、**Euclid（歐幾里得）**、**Keter（凱特爾）** 與 **Thaumiel（陶米爾）** 四大項目等級各 10 隻、**總計 40 個經典異常實體（SCP）** 的詳細收容檔案。
+**《SCP 基金會怪物圖鑑》** 是一款使用 **SwiftUI** 與 **WebKit** 原生打造的 iOS / iPadOS 機密收容檔案百科 App。整體視覺以「SCP 基金會第 4 級／O5 議會最高機密終端機」為主題，完整收錄 **Safe（安全）**、**Euclid（歐幾里得）**、**Keter（凱特爾）** 與 **Thaumiel（陶米爾）** 四大項目等級各 10 隻、**總計 40 個經典異常實體（SCP）** 的詳細收容檔案。
 
-透過流暢的水平分頁輪播卡片（Page 輪播）、直覺的「盒子測試法則」分級說明、三段式機密觀測紀錄幻燈片，以及內建的 **SCP 基金會繁體中文官網（`WebView`）**，讓特工與研究員能隨時查閱特殊收容措施與原始專案報告。
+透過流暢的水平分頁輪播卡片（Page 輪播）、直覺的「盒子測試法則」分級說明、三段式機密觀測紀錄幻燈片，以及內建的 **SCP 基金會繁體中文官網（`WebView`）**，讓特工與研究員能隨時查閱特殊收容措施與原始專案報告。此外在 **iPad** 大螢幕上，`TabView` 會自動適配為位於**畫面正上方的懸浮式頂部導覽列（Top Tab Bar）**，提供更寬廣舒適的閱讀體驗。
 
 ---
 
 ## 🎬 App 操作 GIF 與畫面截圖
 
-### 📽️ 實機操作展示 GIF
+### 🎞️ 實機操作展示 GIF
 
 <div align="center">
   <img src="screenshots/demo.gif" alt="SCP 基金會怪物圖鑑 操作 GIF" width="320" />
   <p><em>👆 展示四大異常等級切換、頂部水平滑動精選卡片、機密觀測幻燈片與內建繁中 Wiki 網頁瀏覽。</em></p>
 </div>
 
-### 📱 畫面截圖一覽
+### 📱 iPhone 畫面截圖一覽
 
 <div align="center">
 
@@ -193,8 +206,21 @@ SCP 基金會怪物圖鑑/
 
 </div>
 
+<br />
+
+### 💻 iPad 版面適配展示（重點：Tab 導覽列位於畫面上方）
+
+<div align="center">
+
+| 💻 iPad Pro 11-inch 實機截圖 — 頂部懸浮式 Tab 導覽列（Tab 在畫面上方） |
+| :---: |
+| <img src="screenshots/ipad_top_tab.png" alt="iPad 頂部 Tab 導覽列截圖" width="460" /> |
+| **iPadOS 原生頂部 Tab 導覽列（`Safe` · `Euclid` · `Keter` · `Thaumiel` · `基金會官網`）**<br/>在 iPad 上自動將五大分類 Tab 移至**畫面正上方懸浮膠囊列**，搭配大尺寸卡片與清單呈現更寬廣的機密終端視野 |
+
+</div>
+
 > [!TIP]
-> **📁 圖片與 GIF 放置路徑說明：** 請在專案根目錄建立 `screenshots/` 資料夾，並將截圖與操作錄影依上述檔名放入（`demo.gif`、`launch_screen.png`、`safe_list.png`、`euclid_list.png`、`keter_list.png`、`thaumiel_list.png`、`scp_detail.png`、`official_wiki_detail.png`、`official_wiki_tab.png`），即可在 GitHub 上完美顯示！
+> **📁 圖片與 GIF 放置路徑說明：** 所有螢幕截圖（含 iPhone 與 iPad 頂部 Tab 截圖）及操作錄影皆已收納於專案根目錄的 [`screenshots/`](file:///Users/115-1student21/Desktop/SCP%20基金會怪物圖鑑/screenshots) 資料夾中（`demo.gif`、`launch_screen.png`、`safe_list.png`、`euclid_list.png`、`keter_list.png`、`thaumiel_list.png`、`scp_detail.png`、`official_wiki_detail.png`、`official_wiki_tab.png`、`ipad_top_tab.png`）。
 
 ---
 
@@ -202,12 +228,12 @@ SCP 基金會怪物圖鑑/
 
 - 🔐 **O5 最高機密終端啟動畫面 (`SCPLaunchScreenView`)**
   - 採用黑紅漸層警戒配色、無限呼吸縮放動畫的基金會盾牌徽章，以及「未經授權存取將派遣機動特遣隊（MTF）進行記憶刪除」的沉浸式警告橫幅。
-- 🧭 **五大底部導覽分頁 (`TabView`)**
-  - 頂層整合 **Safe**、**Euclid**、**Keter**、**Thaumiel** 四大等級收容庫，以及獨立的 **「基金會官網」** 分頁，搭配對應的 SF Symbols 圖示與紅色主題強調色。
+- 🧭 **跨裝置自適應五大導覽分頁 (`TabView`)**
+  - 整合 **Safe**、**Euclid**、**Keter**、**Thaumiel** 四大等級收容庫，以及獨立的 **「基金會官網」** 分頁，搭配對應的 SF Symbols 圖示與紅色主題強調色；在 iPhone 顯示於底部導覽列，在 **iPad 則自動轉換為畫面頂端的懸浮式膠囊 Tab Bar**。
 - 🎠 **水平滑動 Page 精選異常輪播 (`TabView` + `.tabViewStyle(.page)`)**
   - 每個等級清單頂部皆設有可左右滑動的漸層精選卡片，直觀展示項目編號、等級膠囊標籤、收容站點與核心標語，點擊即可直接進入機密檔案。
 - 📦 **「盒子測試法則」分級定義面板**
-  - 於各分級清單內建經典的「盒子測試法則（The Box Test）」說明區塊，幫助使用者一眼掌握 Safe、Euclid、Keter、Thaumiel 四大收容難度差異。
+  - 於各分類清單內建經典的「盒子測試法則（The Box Test）」說明區塊，幫助使用者一眼掌握 Safe、Euclid、Keter、Thaumiel 四大收容難度差異。
 - 🕵️ **多頁式機密情報幻燈片與詳情頁 (`SCPDetailView`)**
   - 點擊任一異常即可透過 `NavigationLink` 傳遞 `SCPMonster` 資料進入詳情頁，內含：
     - **頂部機密識別卡**：顯示 SF Symbol 專屬圖示、收容站點與威脅等級標示（如 `Black ● 極端滅絕級敵意`）。
@@ -236,12 +262,12 @@ SCP 基金會的項目等級取決於**「收容難度」**而非單純的破壞
 ```text
 SCP 基金會怪物圖鑑/
 ├── SCP 基金會怪物圖鑑.xcodeproj/       # Xcode 專案設定檔
-├── screenshots/                       # App 畫面截圖與操作 GIF 目錄
+├── screenshots/                       # App 畫面截圖（iPhone & iPad）與操作 GIF 目錄
 └── SCP 基金會怪物圖鑑/
     ├── MyApp.swift                    # @main 應用程式入口
     ├── ContentView.swift              # 根視圖：整合 5 個 Tab 分頁與啟動畫面 Sheet
     ├── SCPLaunchScreenView.swift      # O5 最高機密生物識別啟動畫面（含掃描動畫）
-    ├── SCPCategoryListView.swift      # 分級清單頁：Page 輪播卡片 + 盒子法則 + List 導覽
+    ├── SCPCategoryListView.swift      # 分類清單頁：Page 輪播卡片 + 盒子法則 + List 導覽
     ├── SCPDetailView.swift            # 機密檔案詳情頁：識別卡 + 3 頁情報幻燈片 + 收容措施
     ├── SCPWebPageView.swift           # WebKit 原生 WebView 封裝與「基金會官網」快速跳轉分頁
     ├── SCPModel.swift                 # SCPClass 列舉、SCPMonster 資料結構與 40 筆完整資料庫
@@ -255,7 +281,7 @@ SCP 基金會怪物圖鑑/
 - **程式語言：** Swift 6.0
 - **UI 框架：** SwiftUI（`NavigationStack`、`NavigationLink`、`TabView`、`.tabViewStyle(.page)`、`List`、`ScrollView`、`Material` 毛玻璃特效）
 - **網頁視圖：** `WebKit` 原生 SwiftUI `WebView`
-- **系統需求：** iOS 18.4+（同時相容 iPadOS / macOS / visionOS 條件編譯）
+- **系統需求：** iOS / iPadOS 18.4+（同時相容 macOS / visionOS 條件編譯）
 - **開發工具：** Xcode 16.3+ / Xcode 26+
 
 ## 🚀 如何執行專案
@@ -268,7 +294,7 @@ SCP 基金會怪物圖鑑/
 2. **使用 Xcode 開啟：**
    雙擊開啟 `SCP 基金會怪物圖鑑.xcodeproj`。
 3. **編譯並執行：**
-   選擇任一 iPhone 模擬器（例如 **iPhone 16 Pro / iPhone 17 Pro**），按下 **`Cmd + R`** 即可啟動機密資料庫。
+   選擇任一 iPhone 或 iPad 模擬器（例如 **iPhone 17 Pro Max** 或 **iPad Pro 11-inch**），按下 **`Cmd + R`** 即可啟動機密資料庫。
 
 ---
 
