@@ -1,18 +1,22 @@
 import SwiftUI
 
-/// SCP 怪物詳細機密檔案頁面（接收上一頁傳來的 SCPMonster 資料）
+/// SCP 怪物詳細機密檔案頁面（SCPDetailView）
+/// 接收上一頁傳來的 `SCPMonster` 資料，完整呈現識別卡、水平滑動情報幻燈片、特殊收容措施、項目描述及官網連結
 struct SCPDetailView: View {
+    /// 由清單頁傳遞過來的目標 SCP 異常項目資料
     let monster: SCPMonster
+    /// 追蹤目前水平滑動情報幻燈片（TabView）所選取的頁籤索引
     @State private var selectedSlideIndex = 0
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                // 頂部機密識別卡
+                // MARK: - 1. 頂部機密識別卡
                 headerCard
 
-                // 水平滑動的分頁情報卡（使用 TabView + .tabViewStyle(.page)）
+                // MARK: - 2. 水平滑動的分頁情報卡（使用 TabView + .tabViewStyle(.page)）
                 VStack(alignment: .leading, spacing: 10) {
+                    // 幻燈片區塊標題與目前頁數指示（例如 1 / 3）
                     HStack {
                         Label(
                             "機密情報幻燈片（左右滑動 Page）",
@@ -27,12 +31,14 @@ struct SCPDetailView: View {
                         .foregroundStyle(.secondary)
                     }
 
+                    // 可左右滑動切換的觀測紀錄卡片組
                     TabView(selection: $selectedSlideIndex) {
                         ForEach(
                             Array(monster.galleryHighlights.enumerated()),
                             id: \.offset
                         ) { index, highlight in
                             VStack(alignment: .leading, spacing: 12) {
+                                // 單張情報卡頂部：圖示、觀測紀錄編號與機密等級標記
                                 HStack {
                                     Image(systemName: monster.symbolName)
                                         .font(.title2)
@@ -50,6 +56,7 @@ struct SCPDetailView: View {
                                         .foregroundStyle(.secondary)
                                 }
 
+                                // 情報重點內容文字
                                 Text(highlight)
                                     .font(.body)
                                     .foregroundStyle(.primary)
@@ -62,6 +69,7 @@ struct SCPDetailView: View {
                             }
                             .padding(18)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            // 使用項目等級代表色的淡色填充與邊框
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(
@@ -81,7 +89,7 @@ struct SCPDetailView: View {
                             )
                             .padding(.horizontal, 4)
                             .padding(.bottom, 28)
-                            .tag(index)
+                            .tag(index) // 綁定頁籤索引以同步更新頁數顯示
                         }
                     }
                     #if os(iOS) || os(visionOS)
@@ -90,7 +98,7 @@ struct SCPDetailView: View {
                     .frame(height: 175)
                 }
 
-                // 特殊收容措施
+                // MARK: - 3. 特殊收容措施 (Special Containment Procedures)
                 VStack(alignment: .leading, spacing: 10) {
                     Label(
                         "特殊收容措施 (Special Containment Procedures)",
@@ -110,7 +118,7 @@ struct SCPDetailView: View {
                         )
                 }
 
-                // 項目描述
+                // MARK: - 4. 項目描述 (Description)
                 VStack(alignment: .leading, spacing: 10) {
                     Label(
                         "項目描述 (Description)",
@@ -130,7 +138,8 @@ struct SCPDetailView: View {
                         )
                 }
 
-                // 透過 NavigationLink 前往內建 WebView 閱讀官方繁中 Wiki 頁面
+                // MARK: - 5. 內建 WebView 官方繁中 Wiki 檔案連結按鈕
+                // 透過 NavigationLink 前往 SCPWebPageView 閱讀完整官方 Wiki 頁面
                 NavigationLink {
                     SCPWebPageView(
                         title: "\(monster.code) 官方檔案",
@@ -173,9 +182,12 @@ struct SCPDetailView: View {
         #endif
     }
 
+    // MARK: - 子視圖：頂部機密識別卡
+    /// 顯示異常項目的代表圖示、編號、等級膠囊標籤、中文名稱、標語及收容站點與威脅等級
     private var headerCard: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .center, spacing: 16) {
+                // 左側圓形徽章圖示
                 ZStack {
                     Circle()
                         .fill(monster.objectClass.badgeColor.opacity(0.2))
@@ -186,6 +198,7 @@ struct SCPDetailView: View {
                         .foregroundStyle(monster.objectClass.badgeColor)
                 }
 
+                // 右側編號、分級標籤、名稱與副標題
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
                         Text("項目編號：\(monster.code)")
@@ -213,6 +226,7 @@ struct SCPDetailView: View {
 
             Divider()
 
+            // 底部收容站點與威脅程度資訊列
             HStack {
                 Label(
                     "收容站點：\(monster.containmentSite)",
@@ -236,6 +250,7 @@ struct SCPDetailView: View {
     }
 }
 
+/// 預覽：詳細機密檔案頁面
 #Preview {
     NavigationStack {
         SCPDetailView(monster: SCPDatabase.allMonsters[4])

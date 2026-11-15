@@ -1,14 +1,21 @@
 import SwiftUI
 
-/// SCP 項目等級（Object Class）
+/// SCP 項目等級（Object Class）列舉
+/// 定義基金會四大核心收容等級，並提供對應的中文名稱、代表色、SF Symbol 圖示與「盒子測試法則」說明
 enum SCPClass: String, CaseIterable, Identifiable {
+    /// 安全級：容易且能夠被完全、穩定地收容的異常
     case safe = "Safe"
+    /// 歐幾里得級：行為無法完全預測、或需要更多資源才能穩定收容的異常（包含多數具自主意識之實體）
     case euclid = "Euclid"
+    /// 凱特爾級：極度難以持續收容、隨時有收容突破風險的高危險異常
     case keter = "Keter"
+    /// 陶米爾級：基金會最高機密等級，本身即為用來收容或反制其他 Keter 級異常的王牌工具
     case thaumiel = "Thaumiel"
 
+    /// 遵循 Identifiable 協定，使用原始字串作為唯一識別碼
     var id: String { rawValue }
 
+    /// 結合英文代號與繁體中文譯名的完整等級標題
     var chineseTitle: String {
         switch self {
         case .safe: return "Safe（安全）"
@@ -18,6 +25,7 @@ enum SCPClass: String, CaseIterable, Identifiable {
         }
     }
 
+    /// 各收容等級在介面中對應的視覺代表色（綠、橘、紅、紫）
     var badgeColor: Color {
         switch self {
         case .safe: return .green
@@ -27,6 +35,7 @@ enum SCPClass: String, CaseIterable, Identifiable {
         }
     }
 
+    /// 各收容等級對應的 SF Symbol 系統圖示名稱
     var systemIcon: String {
         switch self {
         case .safe: return "checkmark.shield.fill"
@@ -36,6 +45,7 @@ enum SCPClass: String, CaseIterable, Identifiable {
         }
     }
 
+    /// 基金會著名的「盒子測試法則（Locked Box Test）」分級判斷說明文字
     var boxRuleSummary: String {
         switch self {
         case .safe:
@@ -50,21 +60,34 @@ enum SCPClass: String, CaseIterable, Identifiable {
     }
 }
 
-/// SCP 怪物／異常項目資料結構（遵從 Identifiable）
+/// SCP 怪物／異常項目資料結構（遵循 Identifiable 與 Hashable 以支援 List 及 NavigationStack 型別導覽）
 struct SCPMonster: Identifiable, Hashable {
+    /// 每個異常項目的唯一識別 UUID
     let id = UUID()
-    let code: String  // 例如 "SCP-173"
-    let name: String  // 例如 "雕像 - 最初之作"
-    let objectClass: SCPClass  // Safe, Euclid, Keter, Thaumiel
-    let containmentSite: String  // 收容站點
-    let threatLevel: String  // 威脅等級標示
-    let symbolName: String  // SF Symbol 圖示
-    let tagline: String  // 簡短標語
-    let procedures: String  // 特殊收容措施
-    let description: String  // 項目描述
-    let galleryHighlights: [String]  // 用於水平分頁滑動展示的多張檔案情報卡
-    let wikiURLString: String  // 對應的繁體中文 Wiki 網址
+    /// 項目編號（例如 "SCP-173"）
+    let code: String
+    /// 項目中文代號／名稱（例如 "雕像 - 最初之作"）
+    let name: String
+    /// 收容項目等級（Safe、Euclid、Keter、Thaumiel）
+    let objectClass: SCPClass
+    /// 目前收容該項目的基金會站點或封鎖區域（例如 "Site-19"）
+    let containmentSite: String
+    /// 威脅等級與特性標示文字
+    let threatLevel: String
+    /// 代表該異常特徵的 SF Symbol 圖示名稱
+    let symbolName: String
+    /// 顯示於清單與卡片上的簡短標語介紹
+    let tagline: String
+    /// 特殊收容措施（Special Containment Procedures）完整說明
+    let procedures: String
+    /// 項目描述（Description）完整檔案內容
+    let description: String
+    /// 用於詳細頁水平分頁滑動（Page）展示的多張觀測重點情報卡
+    let galleryHighlights: [String]
+    /// 對應的 SCP 基金會繁體中文 Wiki 原始條目網址字串
+    let wikiURLString: String
 
+    /// 將網址字串轉換為 `URL` 物件；若轉換失敗則回退至繁中 Wiki 首頁網址
     var wikiURL: URL {
         URL(string: wikiURLString) ?? URL(
             string: "https://scp-zh-tr.wikidot.com"
@@ -72,10 +95,12 @@ struct SCPMonster: Identifiable, Hashable {
     }
 }
 
-/// SCP 基金會完整資料庫（Safe、Euclid、Keter、Thaumiel 各 10 隻，共 40 隻）
+/// SCP 基金會完整靜態資料庫
+/// 收錄 Safe、Euclid、Keter、Thaumiel 四大等級各 10 隻（總計 40 個）經典異常項目與篩選輔助方法
 enum SCPDatabase {
+    /// 全部 40 個 SCP 異常項目的靜態陣列
     static let allMonsters: [SCPMonster] = [
-        // MARK: - Safe (10 隻)
+        // MARK: - Safe 級異常項目 (共 10 隻：容易穩定收容之異常)
         SCPMonster(
             code: "SCP-999",
             name: "癢癢怪",
@@ -262,7 +287,7 @@ enum SCPDatabase {
             wikiURLString: "https://scp-zh-tr.wikidot.com/scp-529"
         ),
 
-        // MARK: - Euclid (10 隻)
+        // MARK: - Euclid 級異常項目 (共 10 隻：行為難以預測或具自主意識之異常)
         SCPMonster(
             code: "SCP-173",
             name: "雕像 - 最初之作",
@@ -454,7 +479,7 @@ enum SCPDatabase {
             wikiURLString: "https://scp-zh-tr.wikidot.com/scp-610"
         ),
 
-        // MARK: - Keter (10 隻)
+        // MARK: - Keter 級異常項目 (共 10 隻：極度危險且難以持續收容之異常)
         SCPMonster(
             code: "SCP-682",
             name: "不滅孽蜥",
@@ -646,7 +671,7 @@ enum SCPDatabase {
             wikiURLString: "https://scp-zh-tr.wikidot.com/scp-4666"
         ),
 
-        // MARK: - Thaumiel (10 隻)
+        // MARK: - Thaumiel 級異常項目 (共 10 隻：基金會用於收容或反制其他異常之最高機密項目)
         SCPMonster(
             code: "SCP-2000",
             name: "機械降神",
@@ -841,6 +866,9 @@ enum SCPDatabase {
         ),
     ]
 
+    /// 根據指定的 SCP 項目等級（`SCPClass`），篩選並回傳該等級的所有異常項目陣列
+    /// - Parameter scpClass: 欲篩選的目標收容等級（Safe / Euclid / Keter / Thaumiel）
+    /// - Returns: 符合該收容等級的 `[SCPMonster]` 陣列
     static func monsters(for scpClass: SCPClass) -> [SCPMonster] {
         allMonsters.filter { $0.objectClass == scpClass }
     }
