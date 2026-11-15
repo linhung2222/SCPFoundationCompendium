@@ -14,24 +14,36 @@ struct SCPDetailView: View {
                 // 水平滑動的分頁情報卡（使用 TabView + .tabViewStyle(.page)）
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        Label("機密情報幻燈片（左右滑動 Page）", systemImage: "rectangle.split.3x1.fill")
-                            .font(.headline)
+                        Label(
+                            "機密情報幻燈片（左右滑動 Page）",
+                            systemImage: "rectangle.split.3x1.fill"
+                        )
+                        .font(.headline)
                         Spacer()
-                        Text("\(selectedSlideIndex + 1) / \(monster.galleryHighlights.count)")
-                            .font(.caption.monospaced())
-                            .foregroundStyle(.secondary)
+                        Text(
+                            "\(selectedSlideIndex + 1) / \(monster.galleryHighlights.count)"
+                        )
+                        .font(.caption.monospaced())
+                        .foregroundStyle(.secondary)
                     }
 
                     TabView(selection: $selectedSlideIndex) {
-                        ForEach(Array(monster.galleryHighlights.enumerated()), id: \.offset) { index, highlight in
+                        ForEach(
+                            Array(monster.galleryHighlights.enumerated()),
+                            id: \.offset
+                        ) { index, highlight in
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
                                     Image(systemName: monster.symbolName)
                                         .font(.title2)
-                                        .foregroundStyle(monster.objectClass.badgeColor)
+                                        .foregroundStyle(
+                                            monster.objectClass.badgeColor
+                                        )
                                     Text("\(monster.code) 觀測紀錄 #0\(index + 1)")
                                         .font(.subheadline.monospaced().bold())
-                                        .foregroundStyle(monster.objectClass.badgeColor)
+                                        .foregroundStyle(
+                                            monster.objectClass.badgeColor
+                                        )
                                     Spacer()
                                     Text("LEVEL 4 CLASSIFIED")
                                         .font(.caption2.monospaced())
@@ -41,7 +53,10 @@ struct SCPDetailView: View {
                                 Text(highlight)
                                     .font(.body)
                                     .foregroundStyle(.primary)
-                                    .fixedSize(horizontal: false, vertical: true)
+                                    .fixedSize(
+                                        horizontal: false,
+                                        vertical: true
+                                    )
 
                                 Spacer(minLength: 0)
                             }
@@ -49,11 +64,20 @@ struct SCPDetailView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(monster.objectClass.badgeColor.opacity(0.1))
+                                    .fill(
+                                        monster.objectClass.badgeColor.opacity(
+                                            0.1
+                                        )
+                                    )
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(monster.objectClass.badgeColor.opacity(0.35), lineWidth: 1)
+                                    .stroke(
+                                        monster.objectClass.badgeColor.opacity(
+                                            0.35
+                                        ),
+                                        lineWidth: 1
+                                    )
                             )
                             .padding(.horizontal, 4)
                             .padding(.bottom, 28)
@@ -61,42 +85,57 @@ struct SCPDetailView: View {
                         }
                     }
                     #if os(iOS) || os(visionOS)
-                    .tabViewStyle(.page(indexDisplayMode: .always))
+                        .tabViewStyle(.page(indexDisplayMode: .always))
                     #endif
                     .frame(height: 175)
                 }
 
                 // 特殊收容措施
                 VStack(alignment: .leading, spacing: 10) {
-                    Label("特殊收容措施 (Special Containment Procedures)", systemImage: "lock.shield.fill")
-                        .font(.headline)
-                        .foregroundStyle(monster.objectClass.badgeColor)
+                    Label(
+                        "特殊收容措施 (Special Containment Procedures)",
+                        systemImage: "lock.shield.fill"
+                    )
+                    .font(.headline)
+                    .foregroundStyle(monster.objectClass.badgeColor)
 
                     Text(monster.procedures)
                         .font(.body)
                         .lineSpacing(5)
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+                        .background(
+                            .regularMaterial,
+                            in: RoundedRectangle(cornerRadius: 14)
+                        )
                 }
 
                 // 項目描述
                 VStack(alignment: .leading, spacing: 10) {
-                    Label("項目描述 (Description)", systemImage: "doc.text.magnifyingglass")
-                        .font(.headline)
-                        .foregroundStyle(.primary)
+                    Label(
+                        "項目描述 (Description)",
+                        systemImage: "doc.text.magnifyingglass"
+                    )
+                    .font(.headline)
+                    .foregroundStyle(.primary)
 
                     Text(monster.description)
                         .font(.body)
                         .lineSpacing(6)
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+                        .background(
+                            .regularMaterial,
+                            in: RoundedRectangle(cornerRadius: 14)
+                        )
                 }
 
                 // 透過 NavigationLink 前往內建 WebView 閱讀官方繁中 Wiki 頁面
                 NavigationLink {
-                    SCPWebPageView(title: "\(monster.code) 官方檔案", url: monster.wikiURL)
+                    SCPWebPageView(
+                        title: "\(monster.code) 官方檔案",
+                        url: monster.wikiURL
+                    )
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "globe.asia.australia.fill")
@@ -115,7 +154,10 @@ struct SCPDetailView: View {
                     .padding(16)
                     .background(
                         LinearGradient(
-                            colors: [monster.objectClass.badgeColor, monster.objectClass.badgeColor.opacity(0.7)],
+                            colors: [
+                                monster.objectClass.badgeColor,
+                                monster.objectClass.badgeColor.opacity(0.7),
+                            ],
                             startPoint: .leading,
                             endPoint: .trailing
                         ),
@@ -127,7 +169,7 @@ struct SCPDetailView: View {
         }
         .navigationTitle("\(monster.code) \(monster.name)")
         #if os(iOS) || os(visionOS)
-        .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
         #endif
     }
 
@@ -153,7 +195,10 @@ struct SCPDetailView: View {
                             .font(.caption.monospaced().bold())
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
-                            .background(monster.objectClass.badgeColor, in: Capsule())
+                            .background(
+                                monster.objectClass.badgeColor,
+                                in: Capsule()
+                            )
                             .foregroundStyle(.white)
                     }
 
@@ -169,7 +214,10 @@ struct SCPDetailView: View {
             Divider()
 
             HStack {
-                Label("收容站點：\(monster.containmentSite)", systemImage: "building.2.fill")
+                Label(
+                    "收容站點：\(monster.containmentSite)",
+                    systemImage: "building.2.fill"
+                )
                 Spacer()
                 Label(monster.threatLevel, systemImage: "bolt.shield.fill")
             }
@@ -180,7 +228,10 @@ struct SCPDetailView: View {
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18))
         .overlay(
             RoundedRectangle(cornerRadius: 18)
-                .stroke(monster.objectClass.badgeColor.opacity(0.4), lineWidth: 1.5)
+                .stroke(
+                    monster.objectClass.badgeColor.opacity(0.4),
+                    lineWidth: 1.5
+                )
         )
     }
 }

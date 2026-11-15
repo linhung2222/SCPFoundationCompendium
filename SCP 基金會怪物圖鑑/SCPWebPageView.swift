@@ -10,7 +10,7 @@ struct SCPWebPageView: View {
         WebView(url: url)
             .navigationTitle(title)
             #if os(iOS) || os(visionOS)
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -31,7 +31,7 @@ struct SCPWikiPortalTabView: View {
         ("SCP-173", "https://scp-zh-tr.wikidot.com/scp-173"),
         ("SCP-682", "https://scp-zh-tr.wikidot.com/scp-682"),
         ("SCP-999", "https://scp-zh-tr.wikidot.com/scp-999"),
-        ("SCP-2000", "https://scp-zh-tr.wikidot.com/scp-2000")
+        ("SCP-2000", "https://scp-zh-tr.wikidot.com/scp-2000"),
     ]
 
     var body: some View {
@@ -48,10 +48,15 @@ struct SCPWikiPortalTabView: View {
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
                                     .background(
-                                        selectedURLString == item.url ? Color.red : Color.secondary.opacity(0.2),
+                                        selectedURLString == item.url
+                                            ? Color.red
+                                            : Color.secondary.opacity(0.2),
                                         in: Capsule()
                                     )
-                                    .foregroundStyle(selectedURLString == item.url ? .white : .primary)
+                                    .foregroundStyle(
+                                        selectedURLString == item.url
+                                            ? .white : .primary
+                                    )
                             }
                         }
                     }
@@ -66,7 +71,7 @@ struct SCPWikiPortalTabView: View {
             }
             .navigationTitle("SCP 基金會繁中官網 (WebView)")
             #if os(iOS) || os(visionOS)
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             #endif
         }
     }

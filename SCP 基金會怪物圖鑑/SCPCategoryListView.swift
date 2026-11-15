@@ -26,10 +26,12 @@ struct SCPCategoryListView: View {
                         }
                     }
                     #if os(iOS) || os(visionOS)
-                    .tabViewStyle(.page(indexDisplayMode: .always))
+                        .tabViewStyle(.page(indexDisplayMode: .always))
                     #endif
                     .frame(height: 215)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 4, trailing: 0))
+                    .listRowInsets(
+                        EdgeInsets(top: 10, leading: 0, bottom: 4, trailing: 0)
+                    )
                     .listRowBackground(Color.clear)
                 } header: {
                     HStack {
@@ -55,7 +57,8 @@ struct SCPCategoryListView: View {
                 }
 
                 // Section 3: 4 隻怪物的 List 表格列，點擊透過 NavigationLink 傳遞 monster 到下一頁
-                Section("\(scpClass.chineseTitle) 收容清單（共 \(monsters.count) 項）") {
+                Section("\(scpClass.chineseTitle) 收容清單（共 \(monsters.count) 項）")
+                {
                     ForEach(monsters) { monster in
                         NavigationLink(value: monster) {
                             SCPMonsterRowView(monster: monster)
@@ -82,7 +85,7 @@ struct SCPFeaturedPageCard: View {
                     LinearGradient(
                         colors: [
                             monster.objectClass.badgeColor.opacity(0.85),
-                            Color(red: 0.1, green: 0.11, blue: 0.15)
+                            Color(red: 0.1, green: 0.11, blue: 0.15),
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -124,7 +127,10 @@ struct SCPFeaturedPageCard: View {
                     .lineLimit(2)
 
                 HStack {
-                    Label(monster.containmentSite, systemImage: "mappin.and.ellipse")
+                    Label(
+                        monster.containmentSite,
+                        systemImage: "mappin.and.ellipse"
+                    )
                     Spacer()
                     Text("點擊查閱機密檔案 →")
                         .fontWeight(.semibold)
@@ -135,7 +141,11 @@ struct SCPFeaturedPageCard: View {
             }
             .padding(16)
         }
-        .shadow(color: monster.objectClass.badgeColor.opacity(0.25), radius: 6, y: 3)
+        .shadow(
+            color: monster.objectClass.badgeColor.opacity(0.25),
+            radius: 6,
+            y: 3
+        )
     }
 }
 
@@ -172,7 +182,10 @@ struct SCPMonsterRowView: View {
                     .lineLimit(2)
 
                 HStack(spacing: 8) {
-                    Label(monster.containmentSite, systemImage: "building.columns.fill")
+                    Label(
+                        monster.containmentSite,
+                        systemImage: "building.columns.fill"
+                    )
                     Text("·")
                     Text(monster.threatLevel)
                 }
